@@ -1,4 +1,11 @@
 function getDropdown(){
+
+    if('ServiceWorker' in navigator){
+        navigator.serviceWorker.register('/sw.js')
+        .then((registration)=>console.log('registration successful, scope is:', registration.scope))
+        .catch((error)=> console.log('Service worker registration failed, error:', error));
+    }
+
     let dropDown = document.getElementById('currencyFrom');
     let dropDown2 = document.getElementById('currencyTo');
     let numberToConvert = document.getElementById('numberToConvert');
@@ -34,6 +41,7 @@ function getDropdown(){
         let fromTo = convertFrom+'_'+convertTo;
         
         let convertUrl = 'https://free.currencyconverterapi.com/api/v5/convert?q='+fromTo+'&compact=y';
+        
         fetch(convertUrl).then(response =>{
             return response.json();
         }).then(function(conData){
