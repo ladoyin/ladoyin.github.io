@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="css/convert.css" >
+    <script src="javascript/convert.js"></script>
+    <script src="javascript/sw.js"></script>
+</head>
+<body>
+    <header>
+        <h2>Currency Converter</h2>
+    </header>
+    <div id="big_wrapper">
+    <table>
+        <tbody>
+            <tr>
+                <td>From</td>
+                <td>To</td>
+            </tr>
+            <tr>
+                <td class="tabled"><select id="currencyFrom"></select></td>      
+                <td class="tabled"><select id="currencyTo"></select></td>
+            </tr>
+            <tr>
+                <td>Amount to Convert</td>
+            </tr>
+            <tr>
+                <td class="tabled"><input class="noConv" id="numberToConvert" type="text" value=""/></td>
+                <td class="tabled"><input id="convertButton" type="submit" value="Convert"/></td>
+            </tr>    
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Result</td>
+            </tr>
+            <tr>
+                <td class="tabled"><input id="totalConvert" type="text" value="" disabled/></td>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+</body>
+</html>
