@@ -1,11 +1,4 @@
 function getDropdown(){
-
-    if('ServiceWorker' in navigator){
-        navigator.serviceWorker.register('/sw.js')
-        .then((registration)=>console.log('registration successful, scope is:', registration.scope))
-        .catch((error)=> console.log('Service worker registration failed, error:', error));
-    }
-
     let dropDown = document.getElementById('currencyFrom');
     let dropDown2 = document.getElementById('currencyTo');
     let numberToConvert = document.getElementById('numberToConvert');

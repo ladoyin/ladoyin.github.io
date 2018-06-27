@@ -5,7 +5,15 @@
     <title>Page Title</title>
     <link rel="stylesheet" href="css/convert.css" >
     <script src="javascript/convert.js"></script>
+    <script>
+        if('ServiceWorker' in navigator){
+            navigator.serviceWorker.register('/sw.js')
+            .then((registration)=>console.log('registration successful, scope is:', registration.scope))
+            .catch((error)=> console.log('Service worker registration failed, error:', error));
+        }
+    </script>
     <script src="javascript/sw.js"></script>
+
 </head>
 <body>
     <header>
