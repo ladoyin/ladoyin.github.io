@@ -28,8 +28,8 @@ function openDatabase(){
             });
             return tx.complete;
         }).catch(err => console.log('Error -', err));
-        dbPromise.then(db => console.log(db));
     });
+    dbPromise.then(db => console.log(db));
 }
 function getDropdown(){
     let dropDown = document.getElementById('currencyFrom');
