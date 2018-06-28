@@ -1,8 +1,8 @@
 if('serviceWorker' in navigator){
-    window.addEventListener('load', function(){
-        navigator.serviceWorker.register('/javascript/sw.js').then(function (registration){
+    window.addEventListener('load', () =>{
+        navigator.serviceWorker.register('/javascript/sw.js').then(registration =>{
         console.log('registration successful, scope is:', registration);
-    }).catch(function (error){
+    }).catch(error =>{
         console.log('Service worker registration failed, error:', error);
     });
     });
@@ -18,9 +18,9 @@ function getDropdown(){
         
     const url = 'https://free.currencyconverterapi.com/api/v5/countries';
         
-    fetch(url).then(function(response){
+    fetch(url).then(response =>{
         return response.json();
-    }).then(function(data){
+    }).then(data =>{
         let option;
         let option2;
         let myObj = data.results;
@@ -48,7 +48,7 @@ function getDropdown(){
         
         fetch(convertUrl).then(response =>{
             return response.json();
-        }).then(function(conData){
+        }).then(conData =>{
             const toGetCurrencyVal = conData[fromTo];
             console.log(toGetCurrencyVal);
             totalConvert.value = numberToConvert.value * toGetCurrencyVal.val;
