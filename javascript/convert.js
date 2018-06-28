@@ -11,10 +11,10 @@ window.addEventListener('load', openDatabase);
 
 function openDatabase(){
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
-    return dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
+    let dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
         var store = upgradeDb.createObjectStore('currencies', {keyPath: 'id'});
         store.createIndex('curreny-Id', 'currencyId');
-    })
+    });
 }
 function getDropdown(){
     let dropDown = document.getElementById('currencyFrom');
