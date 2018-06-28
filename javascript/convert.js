@@ -27,7 +27,7 @@ function openDatabase(){
                 store.put(currenciesOfCountry);
             });
             return tx.complete;
-        });
+        }).then(db => console.log(db));
     });
 }
 function getDropdown(){
