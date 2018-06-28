@@ -6,9 +6,9 @@ self.addEventListener('install', function(event){
             console.log(cache, 'opened cache');
             return cache.addAll([
                 './',
-                './index.html',
                 './css/convert.css',
-                './javascript/convert.js'
+                './javascript/convert.js',
+                './index.html'
             ]);
         })
     );
