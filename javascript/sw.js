@@ -1,9 +1,10 @@
-var cacheName = 'converter-v1';
-var urlsToCache = [
-    './',
-    './css/convert.css',
-    './javascript/convert.js',
-    './index.html'
+let cacheName = 'converter-v1';
+
+let urlsToCache = [
+    '/',
+    '/css/convert.css',
+    '/javascript/convert.js',
+    '/index.html'
 ];
 self.addEventListener('install', function(event){
     console.log('service worker installing');
