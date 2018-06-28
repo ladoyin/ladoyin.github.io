@@ -15,6 +15,11 @@ function openDatabase(){
         var store = upgradeDb.createObjectStore('currencies', {keyPath: 'id'});
         store.createIndex('curreny-Id', 'currencyId');
     });
+    fetch(apiUrl).then(response =>{
+        return response.json();
+    }).then(currencies =>{
+        console.log(currencies);
+    });
 }
 function getDropdown(){
     let dropDown = document.getElementById('currencyFrom');
