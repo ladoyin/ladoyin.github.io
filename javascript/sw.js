@@ -1,5 +1,4 @@
-var cacheName = 'converter-v2'
-
+var cacheName = 'converter-v2';
 
 self.addEventListener('install', function(event){
     event.waitUntil(
