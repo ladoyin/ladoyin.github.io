@@ -11,14 +11,23 @@ window.addEventListener('load', openDatabase);
 
 function openDatabase(){
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
+    let currenciesOfCountries;
     let dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
-        var store = upgradeDb.createObjectStore('currencies', {keyPath: 'id'});
+        let store = upgradeDb.createObjectStore('currencies', {keyPath: 'id'});
         store.createIndex('curreny-Id', 'currencyId');
     });
     fetch(apiUrl).then(response =>{
         return response.json();
     }).then(currencies =>{
-        console.log(currencies);
+        dbPromise.then(db =>{
+            currenciesOfCountries = [currencies.results];
+            let tx = db.transaction('currencies', 'readwrite');
+            let store = tx.objectStore('currencies');
+            currenciesOfCountries.forEach(currenciesOfCountry =>{
+                store.put(currenciesOfCountry);
+            });
+            return tx.complete;
+        });
     });
 }
 function getDropdown(){
