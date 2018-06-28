@@ -29,7 +29,11 @@ function openDatabase(){
             return tx.complete;
         }).catch(err => console.log('Error -', err));
     });
-    dbPromise.then(db => console.log(db));
+    dbPromise.then(db =>{
+        let tx = db.transaction('currencies', 'readonly');
+        let store = tx.objectStore('currencies'); 
+        return store.getAll();
+    }).then(currency => console.log(currency));
 }
 function getDropdown(){
     let dropDown = document.getElementById('currencyFrom');
