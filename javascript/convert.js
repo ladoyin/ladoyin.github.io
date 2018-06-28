@@ -19,7 +19,8 @@ function openDatabase(){
     fetch(apiUrl).then(response =>{
         return response.json();
     }).then(currencies =>{
-        return dbPromise.then(db =>{
+        dbPromise.then(db =>{
+            console.log(db);
             currenciesOfCountries = [currencies.results];
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
