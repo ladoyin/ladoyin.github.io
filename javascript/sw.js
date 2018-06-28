@@ -1,9 +1,9 @@
 var cacheName = 'converter-v1'
 
 
-self.addEventListener('install', event => {
+self.addEventListener('install', function(event){
     event.waitUntil(
-        caches.open(cacheName).then(cache => {
+        caches.open(cacheName).then(function(cache) {
             console.log(cache, 'opened cache');
             return cache.addAll([
                 './',
