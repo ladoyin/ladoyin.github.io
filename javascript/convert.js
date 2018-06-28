@@ -20,11 +20,13 @@ function openDatabase(){
     }).then(currencies =>{
         dbPromise.then(db =>{
             console.log(db);
-            currenciesOfCountries = currencies.results;
+            currenciesOfCountries = [currencies.results];
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
+            console.log(currenciesOfCountries);
             currenciesOfCountries.forEach(currenciesOfCountry =>{
                 store.put(currenciesOfCountry);
+                console.log(currenciesOfCountry);
             });
             return tx.complete;
         });
