@@ -12,6 +12,8 @@ self.addEventListener('install', function(event){
         caches.open(cacheName).then(function(cache) {
             console.log(cache, 'opened cache');
             return cache.addAll(urlsToCache);
+        }).catch(function(err){
+            console.log('Fetch Error -', err);
         })
     );
 });
