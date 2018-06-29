@@ -25,11 +25,8 @@ function openDatabase(){
     fetch(apiUrl).then(response =>{
         return response.json();
     }).then(currencies =>{
-        console.log(currencies);
         dbPromise.then(db =>{
-            console.log(db);
             currenciesOfCountries = currencies.results;
-            console.log(currenciesOfCountries);
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
             Object.keys(currenciesOfCountries).forEach(currenciesOfCountry =>{
@@ -106,9 +103,7 @@ function openDatabase(){
     }).then(data =>{
         let option;
         let option2;
-        console.log(data);
         let myObj = data.results;
-        console.log(myObj);
         for(key in myObj){
             option = document.createElement('option');
             option.text = myObj[key].currencyId + "  |  " + myObj[key].currencyName ;
@@ -135,7 +130,6 @@ function openDatabase(){
         }).then(conData =>{
             dbPromise.then(db =>{
                 let converterFromTos = conData[fromTo];
-                console.log(converterFromTos);
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
                 Object.keys(converterFromTos).forEach(converterFromTo =>{
@@ -143,6 +137,7 @@ function openDatabase(){
                 });
                 return tx.complete;
             }).catch(err => console.log('Error -', err));
+            console.log(conData);
             const toGetCurrencyVal = conData[fromTo];
             console.log(toGetCurrencyVal);
             totalConvert.value = numberToConvert.value * toGetCurrencyVal.val;
