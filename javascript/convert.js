@@ -9,6 +9,13 @@ if('serviceWorker' in navigator){
 }
 window.addEventListener('load', openDatabase);
 
+let dropDown = document.getElementById('currencyFrom');
+let dropDown2 = document.getElementById('currencyTo');
+let numberToConvert = document.getElementById('numberToConvert');
+let convertButton = document.getElementById('convertButton');
+let totalConvert = document.getElementById('totalConvert');
+
+
 function openDatabase(){
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
     let currenciesOfCountries;
@@ -40,11 +47,28 @@ function openDatabase(){
         let tx = db.transaction('currencies', 'readonly');
         let store = tx.objectStore('currencies'); 
         return store.getAll();
-    }).then(currencies => console.log(currencies));
+    }).then(currencies => {
+        let option;
+        let option2;
+        console.log(currencies)
+        for(key in currencies){
+            option = document.createElement('option');
+            option.text = currencies[key].currencyId + "  |  " + currencies[key].currencyName ;
+            option.value = currencies[key].currencyId;
+            
+            option2 = document.createElement('option');
+            option2.text = currencies[key].currencyId + "  |  " + currencies[key].currencyName;
+            option2.value = currencies[key].currencyId;
+            
+            dropDown.appendChild(option);
+            dropDown2.appendChild(option2);
+        }
+    }).catch(err => console.log('Fetch Error -', err));
+        
 }
 
 function getDropdown(){
-    let dropDown = document.getElementById('currencyFrom');
+  /*  let dropDown = document.getElementById('currencyFrom');
     let dropDown2 = document.getElementById('currencyTo');
     let numberToConvert = document.getElementById('numberToConvert');
     let convertButton = document.getElementById('convertButton');
@@ -73,7 +97,7 @@ function getDropdown(){
             dropDown2.appendChild(option2);
         }
     }).catch(err => console.log('Fetch Error -', err));
-
+*/
     convertButton.addEventListener('click', ()=>{
         let convertFrom = dropDown.value;
         let convertTo = dropDown2.value;
