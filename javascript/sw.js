@@ -1,15 +1,14 @@
 let cacheName = 'converter-v1';
 
-let urlsToCache = [
-    '/',
-    '/index.html',
-    '/javascript/convert.js',
-    '/style/convert.css'
-];
 self.addEventListener('install', event =>{
     event.waitUntil(
         caches.open(cacheName).then(cache => {
-            return cache.addAll(urlsToCache);
+            return cache.addAll( [
+                '/',
+                '/index.html',
+                '/javascript/main.js',
+                '/style/main.css'
+            ]);
         }).catch(err =>{
             console.log('Fetch Error -', err);
         })
