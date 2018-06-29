@@ -16,12 +16,13 @@ function openDatabase(){
         let store = upgradeDb.createObjectStore('currencies', {autoIncrement: true});
     });
     fetch(apiUrl).then(response =>{
-        return JSON.parse(response);
+        return response.json();
     }).then(currencies =>{
         console.log(currencies);
         dbPromise.then(db =>{
             console.log(db);
             currenciesOfCountries = currencies.results;
+            console.log(currenciesOfCountries);
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
             currenciesOfCountries.forEach(currenciesOfCountry =>{
