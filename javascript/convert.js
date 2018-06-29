@@ -43,19 +43,19 @@ function openDatabase(){
         let store = tx.objectStore('currencies'); 
         return store.getAll();
     }).then(currencies => {
-        //let option;
+        let option;
         let option2;
         console.log(currencies)
         for(key in currencies){
-            //option = document.createElement('option');
-            //option.text = currencies[key].currencyId + "  |  " + currencies[key].currencyName ;
-            //option.value = currencies[key].currencyId;
+            option = document.createElement('option');
+            option.text = currencies[key].currencyId + "  |  " + currencies[key].currencyName ;
+            option.value = currencies[key].currencyId;
             
             option2 = document.createElement('option');
             option2.text = currencies[key].currencyId + "  |  " + currencies[key].currencyName;
             option2.value = currencies[key].currencyId;
             
-            //dropDown.appendChild(option);
+            dropDown.appendChild(option);
             dropDown2.appendChild(option2);
         }
     }).catch(err => console.log('Fetch Error -', err));
