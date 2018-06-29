@@ -21,7 +21,7 @@ function openDatabase(){
         console.log(currencies);
         dbPromise.then(db =>{
             console.log(db);
-            currenciesOfCountries = [currencies.results];
+            currenciesOfCountries = currencies.results;
             console.log(currenciesOfCountries);
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
