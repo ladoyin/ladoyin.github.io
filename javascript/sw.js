@@ -4,7 +4,7 @@ let urlsToCache = [
     '/',
     '/index.html',
     '/javascript/convert.js',
-    '/css/convert.css'
+    '/style/convert.css'
 ];
 self.addEventListener('install', event =>{
     event.waitUntil(
