@@ -19,7 +19,12 @@ function openDatabase(){
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
     let currenciesOfCountries;
     let dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
-        let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
+        switch(upgradeDb.oldVersion){
+            case 0:
+                let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
+            case 1:
+                let store = upgradeDb.createObjectStore('converter', {keyPath: 'fromTo'});
+        }
     });
     fetch(apiUrl).then(response =>{
         return response.json();
