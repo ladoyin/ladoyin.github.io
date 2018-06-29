@@ -24,7 +24,7 @@ function openDatabase(){
             case 0:
                 let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
             case 1:
-                let converterCurrency = upgradeDb.createObjectStore('converter', {keyPath: 'val'});
+                let converterCurrency = upgradeDb.createObjectStore('converter', {autoIncrement: true});
         }
     });
     fetch(apiUrl).then(response =>{
