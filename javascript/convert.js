@@ -33,9 +33,7 @@ function openDatabase(){
         let tx = db.transaction('currencies', 'readonly');
         let store = tx.objectStore('currencies'); 
         return store.getAll();
-    }).then(currencies =>{
-        console.log(currencies);
-    });
+    }).then(currencies => console.log(currencies));
 }
 
 function getDropdown(){
