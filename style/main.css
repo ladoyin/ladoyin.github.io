@@ -1,5 +1,33 @@
-select {width: 200px; 
-    height: 25px;    
+body{
+    display:-webkit-box;
+    -webkit-box-pack:center;  
+    margin-top: 100px;  
+}
+.outterbox{
+    height: 350px;
+    width: 500px;
+    box-shadow: 5px 5px 6px #4e4444 ;
+    background-color: #d36969;
+}
+header{
+    font: bold 20px Tahoma;
+    color: #e0b8b8;
+
+}
+h2{
+    text-align: center;
+}
+select {
+    width: 200px; 
+    height: 35px;
+    background-color: rgb(161, 146, 127);   
+}
+.innerbox{
+    margin-left: 20px;
+}
+td{
+    font-size: 20px;
+    font-style: italic;
 }
 .tabled{
     padding-right: 50px;
@@ -8,4 +36,12 @@ select {width: 200px;
 input{
     width: 150px; 
     height: 25px;
+    background-color: rgb(161, 146, 127);
+    color: rgb(214, 187, 187);
+    font-size: 20px;
+}
+input[type=submit]{
+    height: 30px;
+    width: 100px;
+    background-color: #413535;
 }
