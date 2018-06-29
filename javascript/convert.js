@@ -16,11 +16,12 @@ function openDatabase(){
         let store = upgradeDb.createObjectStore('currencies', {autoIncrement: true});
     });
     fetch(apiUrl).then(response =>{
-        return response.json();
+        return JSON.parse(response);
     }).then(currencies =>{
+        console.log(currencies);
         dbPromise.then(db =>{
             console.log(db);
-            currenciesOfCountries = [currencies.results];
+            currenciesOfCountries = currencies.results;
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
             currenciesOfCountries.forEach(currenciesOfCountry =>{
@@ -50,6 +51,7 @@ function getDropdown(){
     }).then(data =>{
         let option;
         let option2;
+        console.log(data);
         let myObj = data.results;
         console.log(myObj);
         for(key in myObj){
