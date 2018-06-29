@@ -1,4 +1,4 @@
-let cacheName = 'converter-v4';
+let cacheName = 'converter-v5';
 
 let urlsToCache = [
     '/',
@@ -31,11 +31,14 @@ self.addEventListener('activate', event =>{
 });
 
 self.addEventListener('fetch', event =>{
-    //let requestUrl = new URL(event.request.url)
+    let requestUrl = new URL(event.request.url);
+    if(requestUrl.origin === location.origin){
+        console.log(requestUrl);
+        console.log(requestUrl.origin);
+        console.log(location.origin);
+    }
     event.respondWith(
         caches.match(event.request).then(response =>{
-            console.log(event.request);
-            console.log(response);
             return response || fetch(event.request);
         })
     )
