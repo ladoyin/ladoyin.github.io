@@ -34,8 +34,7 @@ function openDatabase(){
         let store = tx.objectStore('currencies'); 
         return store.getAll();
     }).then(data =>{
-        let myobj = data.results;
-        console.log(myobj);
+        console.log(data);
     });
 }
 
