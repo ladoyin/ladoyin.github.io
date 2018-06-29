@@ -9,8 +9,7 @@ if('serviceWorker' in navigator){
 }
 window.addEventListener('load', openDatabase);
 
-let dropDown = document.getElementById('currencyFrom');
-let dropDown2 = document.getElementById('currencyTo');
+
 let numberToConvert = document.getElementById('numberToConvert');
 let convertButton = document.getElementById('convertButton');
 let totalConvert = document.getElementById('totalConvert');
@@ -43,6 +42,8 @@ function openDatabase(){
         let store = tx.objectStore('currencies'); 
         return store.getAll();
     }).then(currencies => {
+        let dropDown = document.getElementById('currencyFrom');
+        let dropDown2 = document.getElementById('currencyTo');
         let option;
         let option2;
         console.log(currencies)
