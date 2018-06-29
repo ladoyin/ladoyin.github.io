@@ -1,4 +1,4 @@
-let cacheName = 'converter-v2';
+let cacheName = 'converter-v3';
 
 let urlsToCache = [
     '/',
@@ -32,5 +32,15 @@ self.addEventListener('activate', event =>{
         );
         })
     );
+});
+
+self.addEventListener('fetch', event =>{
+    event.respondWith(
+        caches.match(event.request).then(response =>{
+            if(response){
+                return response || fetch(event.request);
+            }
+        })
+    )
 });
 

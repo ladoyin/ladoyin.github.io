@@ -92,7 +92,7 @@ function openDatabase(){
             let store = tx.objectStore('converter'); 
             return store.getAll();
         }).then(converter => console.log(converter))
-    })
+    });
 }
 /*
 function getDropdown(){
