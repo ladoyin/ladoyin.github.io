@@ -1,4 +1,4 @@
-let cacheName = 'converter-v6';
+let cacheName = 'converter-v1';
 
 let urlsToCache = [
     '/',
