@@ -33,8 +33,8 @@ function openDatabase(){
         let tx = db.transaction('currencies', 'readonly');
         let store = tx.objectStore('currencies'); 
         return store.getAll();
-    }).then(data =>{
-        console.log(data);
+    }).then(currencies =>{
+        console.log(currencies);
     });
 }
 
