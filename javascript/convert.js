@@ -24,7 +24,7 @@ function openDatabase(){
             case 0:
                 let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
             case 1:
-                let converterCurrency = upgradeDb.createObjectStore('converter', {keyPath: 'fromTo'});
+                let converterCurrency = upgradeDb.createObjectStore('converter', {keyPath: 'val'});
         }
     });
     fetch(apiUrl).then(response =>{
@@ -77,8 +77,8 @@ function openDatabase(){
             console.log(converter);
             dbPromise.then(db =>{
                 console.log(db);
-                converterFromTos = converter.results;
-                console.log(converterFromTo);
+                converterFromTos = converter[fromTo];
+                console.log(converterFromTos);
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
                 Object.keys(converterFromTos).forEach(converterFromTo =>{
@@ -88,8 +88,8 @@ function openDatabase(){
             }).catch(err => console.log('Error -', err));
         });
         dbPromise.then(db =>{
-            let tx = db.transaction('currencies', 'readonly');
-            let store = tx.objectStore('currencies'); 
+            let tx = db.transaction('converter', 'readonly');
+            let store = tx.objectStore('converter'); 
             return store.getAll();
         }).then(converter => console.log(converter))
     })
