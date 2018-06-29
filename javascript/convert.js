@@ -61,9 +61,9 @@ function openDatabase(){
     }).catch(err => console.log('Fetch Error -', err));
         
 }
-
+/*
 function getDropdown(){
-  /*  let dropDown = document.getElementById('currencyFrom');
+    let dropDown = document.getElementById('currencyFrom');
     let dropDown2 = document.getElementById('currencyTo');
     let numberToConvert = document.getElementById('numberToConvert');
     let convertButton = document.getElementById('convertButton');
@@ -92,8 +92,8 @@ function getDropdown(){
             dropDown2.appendChild(option2);
         }
     }).catch(err => console.log('Fetch Error -', err));
-*/
-/*
+
+
     convertButton.addEventListener('click', ()=>{
         let convertFrom = dropDown.value;
         let convertTo = dropDown2.value;
@@ -109,6 +109,7 @@ function getDropdown(){
             totalConvert.value = numberToConvert.value * toGetCurrencyVal.val;
         }).catch(err => console.log('Fetch Error -', err));
     });
-    */
+    
 }
 window.addEventListener('load', getDropdown);
+*/
