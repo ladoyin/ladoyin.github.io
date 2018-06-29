@@ -93,6 +93,7 @@ function getDropdown(){
         }
     }).catch(err => console.log('Fetch Error -', err));
 */
+/*
     convertButton.addEventListener('click', ()=>{
         let convertFrom = dropDown.value;
         let convertTo = dropDown2.value;
@@ -108,5 +109,6 @@ function getDropdown(){
             totalConvert.value = numberToConvert.value * toGetCurrencyVal.val;
         }).catch(err => console.log('Fetch Error -', err));
     });
+    */
 }
 window.addEventListener('load', getDropdown);
