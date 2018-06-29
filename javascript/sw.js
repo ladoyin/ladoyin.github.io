@@ -31,10 +31,10 @@ self.addEventListener('activate', event =>{
 });
 
 self.addEventListener('fetch', event =>{
-    let requestUrl = new URL(event.request.url)
-    console.log(requestUrl);
+    //let requestUrl = new URL(event.request.url)
     event.respondWith(
         caches.match(event.request).then(response =>{
+            console.log(event.request);
             if(response){
                 return response || fetch(event.request);
             }
