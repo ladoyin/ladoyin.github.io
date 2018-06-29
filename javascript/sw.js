@@ -2,9 +2,9 @@ let cacheName = 'converter-v5';
 
 let urlsToCache = [
     '/',
-    '/css/convert.css',
+    '/index.html',
     '/javascript/convert.js',
-    '/index.html'
+    '/css/convert.css'
 ];
 self.addEventListener('install', event =>{
     event.waitUntil(
