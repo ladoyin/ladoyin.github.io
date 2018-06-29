@@ -10,14 +10,15 @@ if('serviceWorker' in navigator){
 window.addEventListener('load', openDatabase);
 
 
-let numberToConvert = document.getElementById('numberToConvert');
-let convertButton = document.getElementById('convertButton');
-let totalConvert = document.getElementById('totalConvert');
-
-
 function openDatabase(){
+    const numberToConvert = document.getElementById('numberToConvert');
+    const convertButton = document.getElementById('convertButton');
+    const totalConvert = document.getElementById('totalConvert');
+    const dropDown = document.getElementById('currencyFrom');
+    const dropDown2 = document.getElementById('currencyTo');
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
     let currenciesOfCountries;
+    let converterFromTos;
     let dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
         switch(upgradeDb.oldVersion){
             case 0:
@@ -47,8 +48,6 @@ function openDatabase(){
         let store = tx.objectStore('currencies'); 
         return store.getAll();
     }).then(currencies => {
-        let dropDown = document.getElementById('currencyFrom');
-        let dropDown2 = document.getElementById('currencyTo');
         let option;
         let option2;
         console.log(currencies)
@@ -65,7 +64,35 @@ function openDatabase(){
             dropDown2.appendChild(option2);
         }
     }).catch(err => console.log('Fetch Error -', err));
-        
+
+    convertButton.addEventListener('click', () =>{
+        let convertFrom = dropDown.value;
+        let convertTo = dropDown2.value;
+        let fromTo = convertFrom+'_'+convertTo;
+        let convertUrl = 'https://free.currencyconverterapi.com/api/v5/convert?q='+fromTo+'&compact=y';
+
+        fetch(convertUrl).then(response =>{
+            return response.json();
+        }).then(converter =>{
+            console.log(converter);
+            dbPromise.then(db =>{
+                console.log(db);
+                converterFromTos = converter.results;
+                console.log(converterFromTo);
+                let tx = db.transaction('converter', 'readwrite');
+                let store = tx.objectStore('converter');
+                Object.keys(converterFromTos).forEach(converterFromTo =>{
+                    store.put(converterFromTos[converterFromTo]);
+                });
+                return tx.complete;
+            }).catch(err => console.log('Error -', err));
+        });
+        dbPromise.then(db =>{
+            let tx = db.transaction('currencies', 'readonly');
+            let store = tx.objectStore('currencies'); 
+            return store.getAll();
+        }).then(converter => console.log(converter))
+    })
 }
 /*
 function getDropdown(){
