@@ -13,7 +13,7 @@ function openDatabase(){
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
     let currenciesOfCountries;
     let dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
-        let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyId'});
+        let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
     });
     fetch(apiUrl).then(response =>{
         return response.json();
@@ -21,7 +21,7 @@ function openDatabase(){
         console.log(currencies);
         dbPromise.then(db =>{
             console.log(db);
-            currenciesOfCountries = currencies.results;
+            currenciesOfCountries = [currencies.results];
             console.log(currenciesOfCountries);
             let tx = db.transaction('currencies', 'readwrite');
             let store = tx.objectStore('currencies');
