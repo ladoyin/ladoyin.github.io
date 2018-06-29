@@ -33,8 +33,12 @@ function openDatabase(){
         let tx = db.transaction('currencies', 'readonly');
         let store = tx.objectStore('currencies'); 
         return store.getAll();
-    }).then(currency => console.log(currency));
+    }).then(data =>{
+        let myobj = data.results;
+        console.log(myobj);
+    });
 }
+
 function getDropdown(){
     let dropDown = document.getElementById('currencyFrom');
     let dropDown2 = document.getElementById('currencyTo');
@@ -50,7 +54,7 @@ function getDropdown(){
         let option;
         let option2;
         let myObj = data.results;
-
+        console.log(myObj);
         for(key in myObj){
             option = document.createElement('option');
             option.text = myObj[key].currencyId + "  |  " + myObj[key].currencyName ;
