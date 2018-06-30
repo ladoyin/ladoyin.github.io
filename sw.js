@@ -1,8 +1,8 @@
-let cacheName = 'converter-v7';
+let staticCacheName = 'converter-v8';
 
 self.addEventListener('install', event =>{
     event.waitUntil(
-        caches.open(cacheName).then(cache => {
+        caches.open(staticCacheName).then(cache => {
             return cache.addAll( [
                 '/',
                 '/index.html',
@@ -22,8 +22,8 @@ self.addEventListener('activate', event =>{
             console.log(cacheNames);
             return Promise.all(
                 cacheNames.filter(CacheName =>{
-                return cacheName.startsWith('converter') && 
-                        cacheName != cacheName;
+                return cacheName.startsWith('converter-') && 
+                        cacheName != staticCacheName;
                 }).map(cacheName =>{
                     return caches.delete(CacheName);
                 })
