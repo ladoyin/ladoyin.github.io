@@ -39,7 +39,7 @@ function openDatabase(){
         dbPromise.then(db =>{
             let tx = db.transaction('currencies', 'readonly');
             let store = tx.objectStore('currencies'); 
-            let currencyIdIndex = peopleStore.index('currency-id');
+            let currencyIdIndex = store.index('currency-id');
             return store.getAll();
         }).then(currencyId => console.log(currencyId)); 
     /*

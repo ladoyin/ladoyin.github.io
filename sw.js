@@ -30,12 +30,7 @@ self.addEventListener('activate', event =>{
 });
 
 self.addEventListener('fetch', event =>{
-    let requestUrl = new URL(event.request.url);
-    if(requestUrl.origin === location.origin){
-        console.log(requestUrl);
-        console.log(requestUrl.origin);
-        console.log(location.origin);
-    }
+    console.log(event.request);
     event.respondWith(
         caches.match(event.request).then(response =>{
             return response || fetch(event.request);
