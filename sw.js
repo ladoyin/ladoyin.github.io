@@ -1,4 +1,4 @@
-let cacheName = 'converter-v5';
+let cacheName = 'converter-v6';
 let currencyCache = 'currency-v1';
 let allCache = [
     cacheName,
@@ -52,6 +52,7 @@ self.addEventListener('fetch', event =>{
 
 function serveCurrency(request){
     let storageUrl = request.url;
+    console.log(storageUrl);
     return caches.open(currencyCache).then(cache =>{
         return cache.match(storageUrl).then(response =>{
             let networkFetch = fetch(request).then(networkResponse =>{
