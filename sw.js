@@ -1,4 +1,4 @@
-let cacheName = 'converter-v2';
+let cacheName = 'converter-v1';
 
 self.addEventListener('install', event =>{
     event.waitUntil(

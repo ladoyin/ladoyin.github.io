@@ -1,6 +1,6 @@
 if('serviceWorker' in navigator){
     window.addEventListener('load', () =>{
-        navigator.serviceWorker.register('/javascript/sw.js').then(registration =>{
+        navigator.serviceWorker.register('/sw.js').then(registration =>{
         console.log('registration successful, scope is:', registration);
     }).catch(error =>{
         console.log('Service worker registration failed, error:', error);
@@ -18,6 +18,7 @@ function openDatabase(){
         switch(upgradeDb.oldVersion){
             case 0:
                 let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
+                store.createIndex('currency-id', 'currencyId');
             case 1:
                 let converterCurrency = upgradeDb.createObjectStore('converter', {autoIncrement: true});
         }
@@ -35,6 +36,12 @@ function openDatabase(){
             return tx.complete;
         }).catch(err => console.log('Error -', err));
     });
+        dbPromise.then(db =>{
+            let tx = db.transaction('currencies', 'readonly');
+            let store = tx.objectStore('currencies'); 
+            let currencyIdIndex = peopleStore.index('currency-id');
+            return store.getAll();
+        }).then(currencyId => console.log(currencyId)); 
     /*
     dbPromise.then(db =>{
         let tx = db.transaction('currencies', 'readonly');
@@ -105,6 +112,7 @@ function openDatabase(){
         let option2;
         let myObj = data.results;
         for(key in myObj){
+
             option = document.createElement('option');
             option.text = myObj[key].currencyId + "  |  " + myObj[key].currencyName ;
             option.value = myObj[key].currencyId;
@@ -139,8 +147,8 @@ function openDatabase(){
             }).catch(err => console.log('Error -', err));
             console.log(conData);
             const toGetCurrencyVal = conData[fromTo];
-            console.log(toGetCurrencyVal);
-            totalConvert.value = numberToConvert.value * toGetCurrencyVal.val;
+            let totalCalc = numberToConvert.value * toGetCurrencyVal.val;
+            totalConvert.value = totalCalc.toFixed(2);
         }).catch(err => console.log('Fetch Error -', err));
     });
     
