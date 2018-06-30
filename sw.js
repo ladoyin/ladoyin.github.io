@@ -1,4 +1,9 @@
-let cacheName = 'converter-v3';
+let cacheName = 'converter-v4';
+let currencyCache = 'currency-v1';
+let allCache = [
+    cacheName,
+    currencyCache
+];
 
 self.addEventListener('install', event =>{
     event.waitUntil(
@@ -20,7 +25,7 @@ self.addEventListener('activate', event =>{
         caches.keys().then(cacheNames =>{
             console.log(cacheNames);
             return Promise.all(cacheNames.map(thisCacheName =>{
-                if(thisCacheName !== cacheName){
+                if(thisCacheName !== allCache){
                     return caches.delete(thisCacheName);
                 }
             })
@@ -31,12 +36,28 @@ self.addEventListener('activate', event =>{
 
 self.addEventListener('fetch', event =>{
     let requestUrl = new URL(event.request.url);
-    console.log(requestUrl.pathname);
-    console.log(location.pathname);
+    if(requestUrl.origin === location.origin){
+        if(requestUrl.pathname.startsWith('/api/')){
+            event.respondWith(serveCurrency(event.request));
+        }
+    }
     event.respondWith(
         caches.match(event.request).then(response =>{
             return response || fetch(event.request);
         }).catch(err => console.log(err))
     )
 });
+
+function serveCurrency(request){
+    let storageUrl = request.url;
+    return caches.open(currencyCache).then(cache =>{
+        return cache.match(storageUrl).then(response =>{
+            let networkFetch = fetch(request).then(networkResponse =>{
+                cache.put(storageUrl, networkResponse.clone());
+                return networkResponse;
+            });
+            return response || networkFetch;
+        });
+    });
+}
 
