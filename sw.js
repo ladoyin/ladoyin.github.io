@@ -30,7 +30,7 @@ self.addEventListener('activate', event =>{
 });
 
 self.addEventListener('fetch', event =>{
-    let requestUrl = new URL(even.request.url);
+    let requestUrl = new URL(event.request.url);
     console.log(requestUrl.origin);
     console.log(location.origin);
     event.respondWith(
