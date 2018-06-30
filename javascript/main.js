@@ -25,7 +25,7 @@ function openDatabase(){
                 store.createIndex('currencyid', 'currencyId');
         }
     });
-    
+
     fetch(apiUrl).then(response =>{
         return response.json();
     }).then(currencies =>{
@@ -43,7 +43,7 @@ function openDatabase(){
             let tx = db.transaction('currencies', 'readonly');
             let store = tx.objectStore('currencies'); 
             let currencyIdIndex = store.index('currencyid');
-            return currencyIdIndex.getAll();
+            return currencyIdIndex.getAll('currencyName');
         }).then(currencyId => console.log(currencyId)); 
     /*
     dbPromise.then(db =>{
