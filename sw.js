@@ -1,4 +1,4 @@
-let cacheName = 'converter-v2';
+let cacheName = 'converter-v3';
 
 self.addEventListener('install', event =>{
     event.waitUntil(
@@ -31,8 +31,8 @@ self.addEventListener('activate', event =>{
 
 self.addEventListener('fetch', event =>{
     let requestUrl = new URL(event.request.url);
-    console.log(requestUrl.origin);
-    console.log(location.origin);
+    console.log(requestUrl.pathname);
+    console.log(location.pathname);
     event.respondWith(
         caches.match(event.request).then(response =>{
             return response || fetch(event.request);
