@@ -1,4 +1,4 @@
-let cacheName = 'converter-v4';
+let cacheName = 'converter-v5';
 let currencyCache = 'currency-v1';
 let allCache = [
     cacheName,
@@ -24,11 +24,13 @@ self.addEventListener('activate', event =>{
     event.waitUntil(
         caches.keys().then(cacheNames =>{
             console.log(cacheNames);
-            return Promise.all(cacheNames.map(thisCacheName =>{
-                if(thisCacheName !== allCache){
-                    return caches.delete(thisCacheName);
-                }
-            })
+            return Promise.all(
+                cacheNames.filter(CacheName =>{
+                return cacheName.startsWith('converter') && 
+                        !allCache.includes(cacheName);
+                }).map(cacheName =>{
+                    return caches.delete(CacheName);
+                })
         );
         })
     );
