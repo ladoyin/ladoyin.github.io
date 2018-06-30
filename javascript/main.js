@@ -17,12 +17,15 @@ function openDatabase(){
     let dbPromise = idb.open('currncies-country', 2, upgradeDb =>{
         switch(upgradeDb.oldVersion){
             case 0:
-                let store = upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
-                store.createIndex('currency-id', 'currencyId');
+                upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
             case 1:
                 let converterCurrency = upgradeDb.createObjectStore('converter', {autoIncrement: true});
+            case 2:
+                let store = upgradeDb.transaction.objectStore('currencies');
+                store.createIndex('currencyid', 'currencyId');
         }
     });
+    
     fetch(apiUrl).then(response =>{
         return response.json();
     }).then(currencies =>{
@@ -39,8 +42,8 @@ function openDatabase(){
         dbPromise.then(db =>{
             let tx = db.transaction('currencies', 'readonly');
             let store = tx.objectStore('currencies'); 
-            let currencyIdIndex = store.index('currency-id');
-            return store.getAll();
+            let currencyIdIndex = store.index('currencyid');
+            return currencyIdIndex.getAll();
         }).then(currencyId => console.log(currencyId)); 
     /*
     dbPromise.then(db =>{
