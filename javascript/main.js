@@ -133,10 +133,10 @@ function openDatabase(){
         fetch(convertUrl).then(response =>{
             return response.json();
         }).then(conData =>{
-            let key = fromTo;
             dbPromise.then(db =>{
+                let key = fromTo;
                 let valueKey = conData[fromTo].val;
-                let converterFromTos = {valueKey, id :key};
+                let converterFromTos = {id :key, value};
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
                 store.put(converterFromTos, key);
@@ -151,7 +151,17 @@ function openDatabase(){
                  let tx = db.transaction('converter');
                  let store = tx.objectStore('converter');
                  return store.getAll();
-               }).then(converter => console.log(converter))
+               }).then(converter => {
+                   console.log(converter);
+                   
+                   for(key in converter){
+                       if(converter[key].id === fromTo){
+                        const toGetCurrencyVal = converter[key].value;
+                        let totalCalc = numberToConvert.value * toGetCurrencyVal;
+                        totalConvert.value = totalCalc.toFixed(2);}
+                   }
+                   
+            })
                  
             });
                    //Working with data got from IndexedD
