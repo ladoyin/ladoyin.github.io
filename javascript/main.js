@@ -151,6 +151,7 @@ function openDatabase(){
                  let store = tx.objectStore('converter');
                  return store.openCursor();
                }).then(function continueCursoring(cursor) {
+                   console.log(cursor);
                  if (!cursor) {
                    return;
                  }
