@@ -138,7 +138,7 @@ function openDatabase(){
                 let converterFromTos = conData[fromTo];
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
-                store.put(converterFromTos, key);
+                store.put(converterFromTos.val, key);
                 return tx.complete;
             }).catch(err => console.log('Error -', err));
             console.log(conData);
@@ -150,10 +150,23 @@ function openDatabase(){
                  let tx = db.transaction('converter');
                  let store = tx.objectStore('converter');
                  return store.openCursor();
-               }).then(cursor => {
+               }).then(function continueCursoring(cursor) {
                    console.log(cursor);
+                 if (!cursor) {
+                   return;
+                 }
+                 
+                 for (let field in cursor.value) {
+                   //Working with data got from IndexedDB
+                   if(cursor.key === fromTo){
+                        let cursorValue = cursor.value;
+                        let totalCalc = numberToConvert.value * cursorValue;
+                        totalConvert.value = totalCalc.toFixed(2);
+                   }
+                 }
+                 return cursor.continue().then(continueCursoring);
+               })
          })
-        })
     });
     
 }
