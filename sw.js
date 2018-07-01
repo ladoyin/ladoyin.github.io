@@ -1,4 +1,4 @@
-let staticCacheName = 'converter-v6';
+let staticCacheName = 'converter-v1';
 
 self.addEventListener('install', event =>{
     event.waitUntil(
@@ -7,12 +7,14 @@ self.addEventListener('install', event =>{
                 '/',
                 '/index.html',
                 '/javascript/main.js',
-                '/style/main.css'
+                '/style/main.css',
+                'https://free.currencyconverterapi.com/api/v5/countries'
             ]);
         }).catch(err =>{
             console.log('Fetch Error -', err);
         })
     );
+    self.skipWaiting();
 });
 
 self.addEventListener('activate', event =>{
@@ -30,24 +32,6 @@ self.addEventListener('activate', event =>{
 });
 
 self.addEventListener('fetch', event =>{
-    let eventRequestUrl = new URL(event.request.url);
-
-    if(eventRequestUrl.origin === location.origin){
-        if(eventRequestUrl.pathname.startsWith('/api/')){
-            event.respondWith(
-                caches.open(staticCacheName).then(cache =>{
-                    cache.match(eventRequestUrl.pathname.startsWith('/api/')).then(response =>{
-                        let networkFetch = fetch(event.request).then(networkResponse =>{
-                        cache.put(eventRequestUrl.pathname.startsWith('/api/'), networkResponse.clone());
-                        return networkResponse;
-                    });
-                    return response || networkFetch;
-                });
-                })
-            );
-            return;
-        }
-    }
     event.respondWith(
         caches.match(event.request).then(response =>{
             return response || fetch(event.request);
