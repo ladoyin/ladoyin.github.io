@@ -132,11 +132,12 @@ function openDatabase(){
         fetch(convertUrl).then(response =>{
             return response.json();
         }).then(conData =>{
+            let key = fromTo;
             dbPromise.then(db =>{
                 let converterFromTos = conData[fromTo];
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
-                store.put(conData);
+                store.put(converterFromTos.val, key);
                 return tx.complete;
             }).catch(err => console.log('Error -', err));
             console.log(conData);
@@ -157,8 +158,7 @@ function openDatabase(){
                    //Working with data got from IndexedDB
                    if(field === fromTo){
                         let cursorValue = cursor.value[field];
-                        let totalCalc = numberToConvert.value * cursorValue
-                        ;
+                        let totalCalc = numberToConvert.value * cursorValue;
                         totalConvert.value = totalCalc.toFixed(2);
                    }
                  }
