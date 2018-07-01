@@ -150,23 +150,20 @@ function openDatabase(){
                  let tx = db.transaction('converter');
                  let store = tx.objectStore('converter');
                  return store.openCursor();
-               }).then(function continueCursoring(cursor) {
+               }).then(cursor => {
                    console.log(cursor);
                  if (!cursor) {
                    return;
                  }
-                 
-                 for (let field in cursor.value) {
-                   //Working with data got from IndexedDB
-                   if(cursor.key === fromTo){
+                 }).then(function continueCursoring(cursor){
+                    if(cursor.key === fromTo){
                         let cursorValue = cursor.value;
                         let totalCalc = numberToConvert.value * cursorValue;
                         totalConvert.value = totalCalc.toFixed(2);
                    }
-                 }
                  return cursor.continue().then(continueCursoring);
-               })
-         })
+                 })
+                   //Working with data got from IndexedD
     });
     
 }
