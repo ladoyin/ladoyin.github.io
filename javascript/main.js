@@ -135,10 +135,11 @@ function openDatabase(){
         }).then(conData =>{
             let key = fromTo;
             dbPromise.then(db =>{
-                let converterFromTos = conData[fromTo];
+                let valueKey = conData[fromTo];
+                let converterFromTos = {valueKey, id :key};
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
-                store.put(converterFromTos.val, key);
+                store.put(converterFromTos, key);
                 return tx.complete;
             }).catch(err => console.log('Error -', err));
             console.log(conData);
