@@ -107,6 +107,7 @@ function openDatabase(){
         let option;
         let option2;
         let myObj = data.results;
+        console.log(myObj);
         for(key in myObj){
 
             option = document.createElement('option');
@@ -137,7 +138,7 @@ function openDatabase(){
                 let converterFromTos = conData[fromTo];
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
-                store.put(converterFromTos.val, key);
+                store.put(converterFromTos, key);
                 return tx.complete;
             }).catch(err => console.log('Error -', err));
             console.log(conData);
