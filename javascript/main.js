@@ -143,7 +143,28 @@ function openDatabase(){
             const toGetCurrencyVal = conData[fromTo];
             let totalCalc = numberToConvert.value * toGetCurrencyVal.val;
             totalConvert.value = totalCalc.toFixed(2);
-        }).catch(err => console.log('Fetch Error -', err));
+        }).catch(() =>{
+            dbPromise.then((db) =>{
+                 let tx = db.transaction('converter');
+                 let store = tx.objectStore('converter');
+                 return store.openCursor();
+               }).then(function continueCursoring(cursor) {
+                 if (!cursor) {
+                   return;
+                 }
+                 
+                 for (let field in cursor.value) {
+                   //Working with data got from IndexedDB
+                   if(field === fromTo){
+                        let cursorValue = cursor.value[field];
+                        let totalCalc = numberToConvert.value * cursorValue
+                        ;
+                        totalConvert.value = totalCalc.toFixed(2);
+                   }
+                 }
+                 return cursor.continue().then(continueCursoring);
+               })
+         })
     });
     
 }
