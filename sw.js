@@ -1,4 +1,4 @@
-let staticCacheName = 'converter-v3';
+let staticCacheName = 'converter-v4';
 
 self.addEventListener('install', event =>{
     event.waitUntil(
@@ -34,7 +34,7 @@ self.addEventListener('fetch', event =>{
 
     if(eventRequestUrl.origin === location.origin){
         if(eventRequestUrl.pathname.startsWith('/api/')){
-            console.log(event.request.url);
+            event.respondWith(getCurrency(event.request));
             return;
         }
     }
@@ -44,8 +44,16 @@ self.addEventListener('fetch', event =>{
         }).catch(err => console.log(err))
     );
 });
-/*
+
 function getCurrency(request){
-    console.log(request.url);
+    let currencyApi = request.url;
+    return caches.open(staticCacheName).then(cache =>{
+        cache.match(currencyApi).then(response =>{
+            let networkFetch = fetch(request).then(networkResponse =>{
+                cache.put(currencyApi, networkResponse.clone());
+                return networkResponse;
+            });
+            return response || networkFetch;
+        });
+    });
 }
-*/
