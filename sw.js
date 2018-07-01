@@ -34,7 +34,17 @@ self.addEventListener('fetch', event =>{
 
     if(eventRequestUrl.origin === location.origin){
         if(eventRequestUrl.pathname.startsWith('/api/')){
-            event.respondWith(getCurrency(event.request));
+            event.respondWith(
+                caches.open(staticCacheName).then(cache =>{
+                    cache.match(eventRequestUrl.pathname.startsWith('/api/')).then(response =>{
+                        let networkFetch = fetch(event.request).then(networkResponse =>{
+                        cache.put(eventRequestUrl.pathname.startsWith('/api/'), networkResponse.clone());
+                        return networkResponse;
+                    });
+                    return response || networkFetch;
+                });
+                })
+            );
             return;
         }
     }
