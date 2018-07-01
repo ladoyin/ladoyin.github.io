@@ -161,8 +161,10 @@ function openDatabase(){
                         let totalCalc = numberToConvert.value * cursorValue;
                         totalConvert.value = totalCalc.toFixed(2);
                    }
-                 return cursor.continue().then(continueCursoring);
-                 })
+                   return cursor.continue().then(continueCursoring);
+                 });
+                 
+            });
                    //Working with data got from IndexedD
     });
     
