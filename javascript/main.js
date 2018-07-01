@@ -149,20 +149,8 @@ function openDatabase(){
             dbPromise.then((db) =>{
                  let tx = db.transaction('converter');
                  let store = tx.objectStore('converter');
-                 return store.openCursor();
-               }).then(cursor => {
-                   console.log(cursor);
-                 if (!cursor) {
-                   return;
-                 }
-                 }).then(function continueCursoring(cursor){
-                    if(cursor.key === fromTo){
-                        let cursorValue = cursor.value;
-                        let totalCalc = numberToConvert.value * cursorValue;
-                        totalConvert.value = totalCalc.toFixed(2);
-                   }
-                   return cursor.continue().then(continueCursoring);
-                 });
+                 return store.getAll();
+               }).then(converter => console.log(converter))
                  
             });
                    //Working with data got from IndexedD
