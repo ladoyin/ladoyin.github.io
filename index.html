@@ -2,44 +2,50 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
     <title>Page Title</title>
-    <link rel="stylesheet" href="style/main.css" >
+    <link rel="stylesheet" href="style/main.css">
     <script src="idb.js"></script>
-    <script src="sw.js"></script>
     <script src="javascript/main.js"></script>
+    <script src="sw.js"></script>
 </head>
 <body>
-    <div class="outterbox">
-        <header>
-            <h2>Currency Converter</h2>
-        </header>
-        <table class="innerbox">
-            <tbody>
-                <tr>
-                    <td>From</td>
-                    <td>To</td>
-                </tr>
-                <tr>
-                    <td class="tabled"><select id="currencyFrom"></select></td>      
-                    <td class="tabled"><select id="currencyTo"></select></td>
-                </tr>
-                <tr>
-                    <td>Amount to Convert</td>
-                </tr>
-                <tr>
-                    <td class="tabled"><input class="noConv" id="numberToConvert" type="text" value=""/></td>
-                    <td class="tabled"><input id="convertButton" type="submit" value="Convert"/></td>
-                </tr>    
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>Result</td>
-                </tr>
-                <tr>
-                    <td class="tabled"><input id="totalConvert" type="text" value="" disabled/></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class=".outterestbox">
+        <h1 class="headerTwo">Convert currencies from one country to another </h1>
+        <div class="outterbox">
+            <header>
+                <h2>Currency Converter</h2>
+            </header>
+            <table class="innerbox">
+                <tbody>
+                    <tr>
+                        <td>From</td>
+                        <td>To</td>
+                    </tr>
+                    <tr>
+                        <td class="tabled"><select id="currencyFrom"></select></td>      
+                        <td class="tabled"><select id="currencyTo"></select></td>
+                    </tr>
+                    <tr>
+                        <td>Amount to Convert</td>
+                    </tr>
+                    <tr>
+                        <td class="tabled"><input class="noConv" id="numberToConvert" type="text" value=""/></td>
+                        <td class="tabled"><input id="convertButton" type="submit" value="Convert"/></td>
+                    </tr>    
+                    <tr>
+                        <td>Result</td>
+                    </tr>
+                    <tr>
+                        <td class="tabled"><input id="totalConvert" type="text" value="" disabled/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer>
+            Copyright &copyladoyin_ 2018
+        </footer>
     </div>
-</body>
+    </body>
+    
 </html>

@@ -1,20 +1,41 @@
+* {margin: 0px; 
+    padding: 0px;
+}
 body{
+    margin: 0;
+	height: auto;
     display:-webkit-box;
     -webkit-box-pack:center;  
-    margin-top: 100px;  
+    width:100%;
+    background: #f1f1f1;  
+}
+.outterestbox{     
+    display:-webkit-box; 
+    -webkit-box-orient:vertical; 
+    -webkit-box-flex:1;
 }
 .outterbox{
-    height: 400px;
-    box-shadow: 5px 5px 6px #4e4444 ;
-    background-color: #d36969;
-    min-width:500px;
+    box-shadow: 5px 5px 8px 5px rgba(119, 118, 118, 0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 12px;
+    margin-top: 50px;  
+    background-color: white; 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.innerbox{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+.headerTwo{
+    margin-top: 30px;
+    font: bold 30px Tahoma;
+    text-align: center;
 }
 header{
     font: bold 20px Tahoma;
-    color: #e0b8b8;
-
-}
-h2{
+    color: #f78686;
+    margin-top: 50px;
     text-align: center;
 }
 select {
@@ -22,29 +43,32 @@ select {
     height: 35px;
     background-color: rgb(218, 205, 180);
     font-style: italic;
+    font-weight: 550;
     font-size: 15px;
+    border-radius: 6px;
 }
 option{
     color: rgb(0, 0, 0);
     max-width: 100px;
+    font-weight: 550;
 }
-.innerbox{
-    margin-left: 40px;
-}
+
 td{
     font-size: 20px;
     font-style: italic;
+    font-weight: 550;
 }
 .tabled{
     padding-right: 50px;
     padding-bottom: 20px;
 }
 input{
-    width: 150px; 
-    height: 25px;
+    width: 100px; 
+    height: 30px;
     background-color: rgb(161, 146, 127);
-    color: rgb(255, 255, 255);
+    color: white;
     font-size: 18px; 
+    border-radius: 6px;
 }
 input[type=submit]{
     height: 35px;
@@ -52,4 +76,20 @@ input[type=submit]{
     background-color: #8b6666;
     color: rgb(19, 26, 19);
     font-weight: bold;
+}
+footer{
+    margin-top: 50px;
+    text-align: center;
+    font: bold 15px Tahoma;
+}
+@media (max-width: 800px) {
+	.outterbox{
+	    max-width: 800px;
+        margin: auto;
+        margin-top: 50px;
+	}
+	select{
+	    width: 100%;
+	    margin: 6px;
+    }
 }
