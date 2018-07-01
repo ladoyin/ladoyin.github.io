@@ -135,7 +135,7 @@ function openDatabase(){
         }).then(conData =>{
             dbPromise.then(db =>{
                 let key = fromTo;
-                let valueKey = conData[fromTo].val;
+                let value = conData[fromTo].val;
                 let converterFromTos = {id :key, value};
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
