@@ -1,4 +1,4 @@
-let staticCacheName = 'converter-v4';
+let staticCacheName = 'converter-v5';
 
 self.addEventListener('install', event =>{
     event.waitUntil(
@@ -48,8 +48,8 @@ self.addEventListener('fetch', event =>{
 function getCurrency(request){
     let currencyApi = request.url;
     return caches.open(staticCacheName).then(cache =>{
-        cache.match(currencyApi).then(response =>{
-            let networkFetch = fetch(request).then(networkResponse =>{
+        return  cache.match(currencyApi).then(response =>{
+                let networkFetch = fetch(request).then(networkResponse =>{
                 cache.put(currencyApi, networkResponse.clone());
                 return networkResponse;
             });
