@@ -1,4 +1,4 @@
-let staticCacheName = 'converter-v2';
+let staticCacheName = 'converter-v3';
 
 self.addEventListener('install', event =>{
     event.waitUntil(
@@ -34,7 +34,7 @@ self.addEventListener('fetch', event =>{
 
     if(eventRequestUrl.origin === location.origin){
         if(eventRequestUrl.pathname.startsWith('/api/')){
-            event.respondWith(getCurrency(event.request));
+            console.log(event.request.url);
             return;
         }
     }
@@ -44,7 +44,8 @@ self.addEventListener('fetch', event =>{
         }).catch(err => console.log(err))
     );
 });
-
+/*
 function getCurrency(request){
     console.log(request.url);
 }
+*/
