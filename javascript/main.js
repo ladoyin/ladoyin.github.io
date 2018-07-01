@@ -14,18 +14,10 @@ function openDatabase(){
     const apiUrl = 'https://free.currencyconverterapi.com/api/v5/countries';
     let currenciesOfCountries;
     
-    let dbPromise = idb.open('currncies-country', 2, upgradeDb =>{
-        switch(upgradeDb.oldVersion){
-            case 0:
-                upgradeDb.createObjectStore('currencies', {keyPath: 'currencyName'});
-            case 1:
-                let converterCurrency = upgradeDb.createObjectStore('converter', {autoIncrement: true});
-            case 2:
-                let store = upgradeDb.transaction.objectStore('currencies');
-                store.createIndex('currencyid', 'currencyId');
-        }
+    let dbPromise = idb.open('currncies-country', 1, upgradeDb =>{
+        let converterCurrency = upgradeDb.createObjectStore('converter', {autoIncrement: true});
     });
-
+/*
     fetch(apiUrl).then(response =>{
         return response.json();
     }).then(currencies =>{
@@ -45,7 +37,8 @@ function openDatabase(){
             let currencyIdIndex = store.index('currencyid');
             return currencyIdIndex.getAll('currencyName');
         }).then(currencyId => console.log(currencyId)); 
-    /*
+*/
+/*
     dbPromise.then(db =>{
         let tx = db.transaction('currencies', 'readonly');
         let store = tx.objectStore('currencies'); 
@@ -143,9 +136,7 @@ function openDatabase(){
                 let converterFromTos = conData[fromTo];
                 let tx = db.transaction('converter', 'readwrite');
                 let store = tx.objectStore('converter');
-                Object.keys(converterFromTos).forEach(converterFromTo =>{
-                    store.put(converterFromTos[converterFromTo]);
-                });
+                store.put(conData);
                 return tx.complete;
             }).catch(err => console.log('Error -', err));
             console.log(conData);

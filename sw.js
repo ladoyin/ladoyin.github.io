@@ -8,7 +8,6 @@ self.addEventListener('install', event =>{
                 '/index.html',
                 '/javascript/main.js',
                 '/style/main.css',
-                'https://free.currencyconverterapi.com/api/v5/countries'
             ]);
         }).catch(err =>{
             console.log('Fetch Error -', err);
@@ -33,7 +32,25 @@ self.addEventListener('activate', event =>{
 self.addEventListener('fetch', event =>{
     event.respondWith(
         caches.match(event.request).then(response =>{
-            return response || fetch(event.request);
+            if(response){
+                return response;
+            }
+
+            let requestClone = event.request.clone();
+
+           fetch(requestClone).then(response =>{
+               if(!response){
+                   return response;
+               }
+
+               let responseClone = response.clone();
+
+               caches.open(staticCacheName).then(cache =>{
+                   cache.put(event.request, responseClone);
+                   return response;
+               });
+           });
+
         }).catch(err => console.log(err))
-    )
+    );
 });
